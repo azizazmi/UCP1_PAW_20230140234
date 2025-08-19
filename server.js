@@ -3,7 +3,7 @@ const express = require("express");
 
 const app = express();
 
-const bukuRoutes = require("./routes/perpusdb.js");
+const bookRoutes = require("./routes/perpusdb.js");
 const db = require("./database/db.js");
 const port = process.env.PORT;
 
@@ -12,7 +12,7 @@ app.use(expressLayouts);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/book", bukuRoutes);
+app.use("/buku", bookRoutes);
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
@@ -22,14 +22,14 @@ app.get("/", (req, res) => {
 });
 
 app.get("/buku", (req, res) => {
-  res.json(buku);
+  res.json(book);
 });
 
 app.get("/buku", (req, res) => {
-  db.query("SELECT * FROM buku", (err, buku) => {
+  db.query("SELECT * FROM buku", (err, book) => {
     if (err) return res.status(500).send("Internal Server Error");
-    res.render("buku", {
-      buku: buku,
+    res.render("book", {
+      book: book,
       layout: "layouts/main-layout",
     });
   });

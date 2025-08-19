@@ -5,7 +5,7 @@ const db = require('../database/db');
 router.get('/', (req, res) => {
     db.query('SELECT * FROM buku', (err, results) => {
         if (err) return res.status(500).send('Internal Server Error');
-        res.json(results);
+        res.render("book", { books: results });
     });
 });
 
