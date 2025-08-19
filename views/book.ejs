@@ -140,6 +140,10 @@
           editId = $(this).data("id");
           const currentJudul = $(this).closest("li").find("span").text();
           $("#editJudul").val(currentJudul);
+          const currentPenulis = $(this).closest("li").find("span").text();
+          $("editPenulis").val(currentPenulis);
+          const currentDeskripsi = $(this).closest("li").find("span").text();
+          $("#editDeskripsi").val(currentDeskripsi);
           $("#editModal").modal("show");
         });
 
