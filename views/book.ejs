@@ -15,9 +15,9 @@
 
       <!-- Form to Add New Todo -->
       <form id="addBookForm" class="my-4">
-        <input type="text" id="judul" class="form-control mb-2" placeholder="Judul" required />
-        <input type="text" id="penulis" class="form-control mb-2" placeholder="Penulis" required />
-        <input type="text" id="deskripsi" class="form-control mb-2" placeholder="Deskripsi" required />
+        <input type="text" id="newJudul" class="form-control mb-2" placeholder="Judul" required />
+        <input type="text" id="newPenulis" class="form-control mb-2" placeholder="Penulis" required />
+        <input type="text" id="newDeskripsi" class="form-control mb-2" placeholder="Deskripsi" required />
         <button type="submit" class="btn btn-primary">Add Book</button>
       </form>
 
@@ -109,7 +109,7 @@
           const deskripsi = $("#newDeskripsi").val().trim();
           if (judul && penulis && deskripsi) {
             $.ajax({
-              url: "/buku",
+              url: "/book",
               type: "POST",
               contentType: "application/json",
               data: JSON.stringify({ judul, penulis, deskripsi }),
@@ -127,7 +127,7 @@
         $(".deleteBtn").on("click", function () {
           const id = $(this).data("id");
           $.ajax({
-            url: "/buku/" + id,
+            url: "/book/" + id,
             type: "DELETE",
             success: function () {
               location.reload();
@@ -138,8 +138,8 @@
         // Show edit modal
         $(".editBtn").on("click", function () {
           editId = $(this).data("id");
-          const currentTask = $(this).closest("li").find("span").text();
-          $("#editTask").val(currentTask);
+          const currentJudul = $(this).closest("li").find("span").text();
+          $("#editJudul").val(currentJudul);
           $("#editModal").modal("show");
         });
 
@@ -149,7 +149,7 @@
           const book = $("#editBook").val().trim();
           if (book) {
             $.ajax({
-              url: "/buku/" + editId,
+              url: "/book/" + editId,
               type: "PUT",
               data: JSON.stringify({ judul: judul, penulis: penulis, deskripsi: deskripsi }),
               contentType: "application/json",
