@@ -21,11 +21,11 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/buku", (req, res) => {
+app.get("/buku-data", (req, res) => {
   res.json(book);
 });
 
-app.get("/buku", (req, res) => {
+app.get("/buku-list", (req, res) => {
   db.query("SELECT * FROM buku", (err, book) => {
     if (err) return res.status(500).send("Internal Server Error");
     res.render("book", {
