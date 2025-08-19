@@ -73,13 +73,12 @@
             <div class="modal-body">
               <form id="editBookForm">
                 <div class="form-group">
-                  <label for="editBookForm">Books</label>
-                  <input
-                    type="text"
-                    id="editTask"
-                    class="form-control"
-                    required
-                  />
+                  <label for="editBookForm">Judul</label>
+                  <input type="text" id="editJudul" class="form-control" required />
+                  <label for="editBookForm">Penulis</label>
+                  <input type="text" id="editPenulis" class="form-control mt-2" required />
+                  <label for="editBookForm">Deskripsi</label>
+                  <input type="text" id="editDeskripsi" class="form-control mt-2" required />
                 </div>
                 <button type="submit" class="btn btn-primary mt-3">
                   Save Changes
@@ -146,12 +145,14 @@
         // Update 
         $("#editBookForm").on("submit", function (e) {
           e.preventDefault();
-          const book = $("#editBook").val().trim();
-          if (book) {
+          const judul = $("#editJudul").val().trim();
+          const penulis = $("#editPenulis").val().trim();
+          const deskripsi = $("#editDeskripsi").val().trim();
+          if (judul && penulis && deskripsi) {
             $.ajax({
               url: "/book/" + editId,
               type: "PUT",
-              data: JSON.stringify({ judul: judul, penulis: penulis, deskripsi: deskripsi }),
+              data: JSON.stringify({ judul, penulis, deskripsi }),
               contentType: "application/json",
               success: function () {
                 location.reload();
