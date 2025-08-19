@@ -12,7 +12,7 @@ app.use(expressLayouts);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/buku", bookRoutes);
+app.use("/book", bookRoutes);
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {

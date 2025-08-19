@@ -5,7 +5,9 @@ const db = require('../database/db');
 router.get('/', (req, res) => {
     db.query('SELECT * FROM buku', (err, results) => {
         if (err) return res.status(500).send('Internal Server Error');
-        res.render("book", { books: results });
+        res.render("book", { 
+            books: results,
+            layout: "layouts/main-layout"});
     });
 });
 
@@ -36,7 +38,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     const { judul, penulis, deskripsi } = req.body;
 
-    db.query('UPDATE buku SET judul = ?, penulis = ?, deskripsi = ?,  WHERE id = ?', [judul, penulis, deskripsi, req.params.id], (err, results) => {
+    db.query('UPDATE buku SET judul = ?, penulis = ?, deskripsi = ?  WHERE id = ?', [judul, penulis, deskripsi, req.params.id], (err, results) => {
         if (err) return res.status(500).send('Internal Server Error');
         if (results.affectedRows === 0) return res.status(404).send('Data buku tidak ditemukan');
         res.json({ id: req.params.id, judul, penulis, deskripsi });
